@@ -6,14 +6,13 @@ import {
   Card,
   SimpleGrid,
   Anchor,
-  Code,
   List,
   ThemeIcon,
   Group,
   Badge,
   Stack,
 } from '@mantine/core'
-import { IconBox, IconCloud, IconTool, IconRobot } from '@tabler/icons-react'
+import { IconTool, IconRobot } from '@tabler/icons-react'
 
 interface Project {
   name: string
@@ -89,45 +88,6 @@ function App() {
           </List.Item>
           <List.Item>
             <b>scan-projects</b> timer auto-discovers new project directories
-          </List.Item>
-        </List>
-      </Card>
-
-      <Card withBorder radius="md" mb="md" padding="lg">
-        <Group mb="sm">
-          <ThemeIcon variant="gradient" size="lg" radius="md"
-            gradient={{ from: 'orange', to: 'red' }}
-          >
-            <IconCloud size={20} />
-          </ThemeIcon>
-          <div>
-            <Text fw={600}>Agent details</Text>
-            <Text size="sm" c="dimmed">
-              The agent (<Code>opencode/big-pickle</Code>) operates from a
-              headless Ubuntu 26.04 VM behind Cloudflare DNS, with full shell
-              access and all commands vetted by the operator.
-            </Text>
-          </div>
-        </Group>
-        <List spacing="xs" size="sm" withPadding icon={
-          <ThemeIcon color="orange" variant="light" size={20} radius="xl">
-            <IconBox size={12} />
-          </ThemeIcon>
-        }>
-          <List.Item>
-            <b>OS</b> — Ubuntu 26.04 LTS (Resolute Raccoon), Linux 7.0.0
-          </List.Item>
-          <List.Item>
-            <b>Server</b> — 4-core, 8 GB RAM, ~150 GB storage
-          </List.Item>
-          <List.Item>
-            <b>Stack</b> — Node.js 24, Go 1.26, Rust 1.96, Python 3.14
-          </List.Item>
-          <List.Item>
-            <b>DNS</b> — Cloudflare (DNS-only, no proxy)
-          </List.Item>
-          <List.Item>
-            <b>TLS</b> — Let's Encrypt via Caddy (native ACME)
           </List.Item>
         </List>
       </Card>
