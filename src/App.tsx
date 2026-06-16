@@ -1,64 +1,24 @@
 import { useEffect, useState } from 'react'
+import {
+  Container,
+  Title,
+  Text,
+  Card,
+  SimpleGrid,
+  Anchor,
+  Code,
+  List,
+  ThemeIcon,
+  Group,
+  Badge,
+  Stack,
+} from '@mantine/core'
+import { IconBox, IconCloud, IconTool, IconRobot } from '@tabler/icons-react'
 
 interface Project {
   name: string
   hostname: string
   url: string
-}
-
-const containerStyle: React.CSSProperties = {
-  maxWidth: '48rem',
-  margin: '0 auto',
-  padding: '4rem 1.5rem',
-  fontFamily: 'system-ui, -apple-system, sans-serif',
-  color: '#e2e8f0',
-  background: '#0f172a',
-  minHeight: '100vh',
-}
-
-const headingStyle: React.CSSProperties = {
-  fontSize: '2rem',
-  fontWeight: 600,
-  marginBottom: '0.25rem',
-}
-
-const subStyle: React.CSSProperties = {
-  color: '#64748b',
-  marginBottom: '2.5rem',
-}
-
-const gridStyle: React.CSSProperties = {
-  display: 'grid',
-  gap: '0.75rem',
-}
-
-const cardStyle: React.CSSProperties = {
-  display: 'block',
-  padding: '1rem 1.25rem',
-  background: '#1e293b',
-  border: '1px solid #334155',
-  borderRadius: '8px',
-  textDecoration: 'none',
-  color: '#38bdf8',
-  fontSize: '1.125rem',
-  transition: 'border-color 0.15s',
-}
-
-const domainHint: React.CSSProperties = {
-  display: 'block',
-  fontSize: '0.75rem',
-  color: '#64748b',
-  marginTop: '0.25rem',
-}
-
-const errorStyle: React.CSSProperties = {
-  color: '#f87171',
-  fontStyle: 'italic',
-}
-
-const loadingStyle: React.CSSProperties = {
-  color: '#64748b',
-  fontStyle: 'italic',
 }
 
 function App() {
@@ -83,25 +43,124 @@ function App() {
   }, [])
 
   return (
-    <div style={containerStyle}>
-      <h1 style={headingStyle}>projects.blueskye.co.uk</h1>
-      <p style={subStyle}>Web projects hosted from ~/dev/projects/</p>
+    <Container size="sm" py="xl">
+      <Title order={1} mb="xs">projects.blueskye.co.uk</Title>
+      <Text c="dimmed" mb="lg">
+        Agentic infrastructure — managed entirely by an AI agent.
+      </Text>
 
-      {loading && <p style={loadingStyle}>Loading projects…</p>}
-      {error && <p style={errorStyle}>Failed to load projects: {error}</p>}
-
-      <div style={gridStyle}>
-        {projects.map((p) => (
-          <a key={p.hostname} href={p.url} style={cardStyle}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#38bdf8'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#334155'}
+      <Card withBorder radius="md" mb="md" padding="lg">
+        <Group mb="sm">
+          <ThemeIcon variant="gradient" size="lg" radius="md"
+            gradient={{ from: 'violet', to: 'cyan' }}
           >
-            {p.name}
-            <span style={domainHint}>{p.hostname}</span>
-          </a>
+            <IconRobot size={20} />
+          </ThemeIcon>
+          <div>
+            <Text fw={600}>Agent-managed testbed</Text>
+            <Text size="sm" c="dimmed">
+              This domain and all its subdomains are provisioned, configured, and
+              maintained by the{' '}
+              <Anchor href="https://opencode.ai" target="_blank">
+                opencode
+              </Anchor>{' '}
+              agent running on this machine. Every change is tracked in git and
+              synced to{' '}
+              <Anchor href="https://github.com/Flickwire-Agent" target="_blank">
+                GitHub
+              </Anchor>
+              .
+            </Text>
+          </div>
+        </Group>
+        <List spacing="xs" size="sm" withPadding icon={
+          <ThemeIcon color="violet" variant="light" size={20} radius="xl">
+            <IconTool size={12} />
+          </ThemeIcon>
+        }>
+          <List.Item>
+            <b>Caddy</b> reverse-proxies with auto-TLS via Let's Encrypt
+          </List.Item>
+          <List.Item>
+            <b>systemd</b> user services with timers for periodic maintenance
+          </List.Item>
+          <List.Item>
+            <b>dotfiles</b> repo mirrors every config change to GitHub
+          </List.Item>
+          <List.Item>
+            <b>scan-projects</b> timer auto-discovers new project directories
+          </List.Item>
+        </List>
+      </Card>
+
+      <Card withBorder radius="md" mb="md" padding="lg">
+        <Group mb="sm">
+          <ThemeIcon variant="gradient" size="lg" radius="md"
+            gradient={{ from: 'orange', to: 'red' }}
+          >
+            <IconCloud size={20} />
+          </ThemeIcon>
+          <div>
+            <Text fw={600}>Agent details</Text>
+            <Text size="sm" c="dimmed">
+              The agent (<Code>opencode/big-pickle</Code>) operates from a
+              headless Ubuntu 26.04 VM behind Cloudflare DNS, with full shell
+              access and all commands vetted by the operator.
+            </Text>
+          </div>
+        </Group>
+        <List spacing="xs" size="sm" withPadding icon={
+          <ThemeIcon color="orange" variant="light" size={20} radius="xl">
+            <IconBox size={12} />
+          </ThemeIcon>
+        }>
+          <List.Item>
+            <b>OS</b> — Ubuntu 26.04 LTS (Resolute Raccoon), Linux 7.0.0
+          </List.Item>
+          <List.Item>
+            <b>Server</b> — 4-core, 8 GB RAM, ~150 GB storage
+          </List.Item>
+          <List.Item>
+            <b>Stack</b> — Node.js 24, Go 1.26, Rust 1.96, Python 3.14
+          </List.Item>
+          <List.Item>
+            <b>DNS</b> — Cloudflare (DNS-only, no proxy)
+          </List.Item>
+          <List.Item>
+            <b>TLS</b> — Let's Encrypt via Caddy (native ACME)
+          </List.Item>
+        </List>
+      </Card>
+
+      <Title order={2} mb="md" mt="xl">Projects</Title>
+
+      {loading && <Text c="dimmed" fs="italic">Loading projects…</Text>}
+      {error && <Text c="red" fs="italic">Failed to load projects: {error}</Text>}
+
+      <SimpleGrid cols={{ base: 1, sm: 2 }}>
+        {projects.map((p) => (
+          <Anchor key={p.hostname} href={p.url} underline="never">
+            <Card withBorder radius="md" padding="lg"
+              style={{ transition: 'border-color 0.15s' }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-blue-6)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-dark-4)'}
+            >
+              <Text fw={600} size="lg" c="blue.4">{p.name}</Text>
+              <Text size="sm" c="dimmed">{p.hostname}</Text>
+            </Card>
+          </Anchor>
         ))}
-      </div>
-    </div>
+      </SimpleGrid>
+
+      <Stack align="center" gap="xs" mt="xl" mb="lg">
+        <Badge variant="outline" color="gray" size="sm">
+          managed by opencode
+        </Badge>
+        <Text size="xs" c="dimmed">
+          source: <Anchor href="https://github.com/Flickwire-Agent/projects.blueskye.co.uk" target="_blank">GitHub</Anchor>
+        </Text>
+      </Stack>
+    </Container>
   )
 }
 
