@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-06-17T18:14:37Z",
+  "generatedAt": "2026-06-17T19:10:32Z",
   "windows": [
     {
       "id": "day",
       "label": "Last 24 hours",
-      "since": "2026-06-16T18:14:37Z",
+      "since": "2026-06-16T19:10:32Z",
       "totals": {
-        "messages": 3158,
-        "cost": 11.8232,
+        "messages": 3244,
+        "cost": 12.7327,
         "tokens": {
-          "input": 6062638,
-          "output": 782115,
-          "reasoning": 324921,
-          "cacheRead": 211068038,
+          "input": 6402966,
+          "output": 798413,
+          "reasoning": 331439,
+          "cacheRead": 216438150,
           "cacheWrite": 2345799,
-          "total": 220583511,
-          "billable": 9515473
+          "total": 226316767,
+          "billable": 9878617
         }
       },
       "models": [
@@ -39,16 +39,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 402,
-          "cost": 8.3927,
+          "messages": 463,
+          "cost": 9.3022,
           "tokens": {
-            "input": 607894,
-            "output": 133606,
+            "input": 853579,
+            "output": 145173,
             "reasoning": 0,
-            "cacheRead": 38320128,
+            "cacheRead": 41634560,
             "cacheWrite": 0,
-            "total": 39061628,
-            "billable": 741500
+            "total": 42633312,
+            "billable": 998752
           }
         },
         {
@@ -71,16 +71,16 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 328,
+          "messages": 353,
           "cost": 0,
           "tokens": {
-            "input": 1181467,
-            "output": 75395,
-            "reasoning": 40674,
-            "cacheRead": 19600384,
+            "input": 1276110,
+            "output": 80126,
+            "reasoning": 47192,
+            "cacheRead": 21656064,
             "cacheWrite": 0,
-            "total": 20897920,
-            "billable": 1297536
+            "total": 23059492,
+            "billable": 1403428
           }
         },
         {
@@ -104,18 +104,18 @@
     {
       "id": "week",
       "label": "Last 7 days",
-      "since": "2026-06-10T18:14:37Z",
+      "since": "2026-06-10T19:10:32Z",
       "totals": {
-        "messages": 3158,
-        "cost": 11.8232,
+        "messages": 3244,
+        "cost": 12.7327,
         "tokens": {
-          "input": 6062638,
-          "output": 782115,
-          "reasoning": 324921,
-          "cacheRead": 211068038,
+          "input": 6402966,
+          "output": 798413,
+          "reasoning": 331439,
+          "cacheRead": 216438150,
           "cacheWrite": 2345799,
-          "total": 220583511,
-          "billable": 9515473
+          "total": 226316767,
+          "billable": 9878617
         }
       },
       "models": [
@@ -139,16 +139,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 402,
-          "cost": 8.3927,
+          "messages": 463,
+          "cost": 9.3022,
           "tokens": {
-            "input": 607894,
-            "output": 133606,
+            "input": 853579,
+            "output": 145173,
             "reasoning": 0,
-            "cacheRead": 38320128,
+            "cacheRead": 41634560,
             "cacheWrite": 0,
-            "total": 39061628,
-            "billable": 741500
+            "total": 42633312,
+            "billable": 998752
           }
         },
         {
@@ -171,16 +171,16 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 328,
+          "messages": 353,
           "cost": 0,
           "tokens": {
-            "input": 1181467,
-            "output": 75395,
-            "reasoning": 40674,
-            "cacheRead": 19600384,
+            "input": 1276110,
+            "output": 80126,
+            "reasoning": 47192,
+            "cacheRead": 21656064,
             "cacheWrite": 0,
-            "total": 20897920,
-            "billable": 1297536
+            "total": 23059492,
+            "billable": 1403428
           }
         },
         {
@@ -206,16 +206,16 @@
       "label": "Lifetime",
       "since": null,
       "totals": {
-        "messages": 3158,
-        "cost": 11.8232,
+        "messages": 3244,
+        "cost": 12.7327,
         "tokens": {
-          "input": 6062638,
-          "output": 782115,
-          "reasoning": 324921,
-          "cacheRead": 211068038,
+          "input": 6402966,
+          "output": 798413,
+          "reasoning": 331439,
+          "cacheRead": 216438150,
           "cacheWrite": 2345799,
-          "total": 220583511,
-          "billable": 9515473
+          "total": 226316767,
+          "billable": 9878617
         }
       },
       "models": [
@@ -239,16 +239,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 402,
-          "cost": 8.3927,
+          "messages": 463,
+          "cost": 9.3022,
           "tokens": {
-            "input": 607894,
-            "output": 133606,
+            "input": 853579,
+            "output": 145173,
             "reasoning": 0,
-            "cacheRead": 38320128,
+            "cacheRead": 41634560,
             "cacheWrite": 0,
-            "total": 39061628,
-            "billable": 741500
+            "total": 42633312,
+            "billable": 998752
           }
         },
         {
@@ -271,16 +271,16 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 328,
+          "messages": 353,
           "cost": 0,
           "tokens": {
-            "input": 1181467,
-            "output": 75395,
-            "reasoning": 40674,
-            "cacheRead": 19600384,
+            "input": 1276110,
+            "output": 80126,
+            "reasoning": 47192,
+            "cacheRead": 21656064,
             "cacheWrite": 0,
-            "total": 20897920,
-            "billable": 1297536
+            "total": 23059492,
+            "billable": 1403428
           }
         },
         {
