@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2026-06-17T19:17:19Z",
+  "generatedAt": "2026-06-17T19:36:29Z",
   "windows": [
     {
       "id": "day",
       "label": "Last 24 hours",
-      "since": "2026-06-16T19:17:19Z",
+      "since": "2026-06-16T19:36:29Z",
       "totals": {
-        "messages": 3279,
-        "cost": 13.1767,
+        "messages": 3371,
+        "cost": 15.3295,
         "tokens": {
-          "input": 6437943,
-          "output": 807235,
+          "input": 6624947,
+          "output": 833966,
           "reasoning": 331439,
-          "cacheRead": 218414470,
+          "cacheRead": 228247174,
           "cacheWrite": 2345799,
-          "total": 228336886,
-          "billable": 9922416
+          "total": 238383325,
+          "billable": 10136151
         }
       },
       "models": [
@@ -39,16 +39,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 498,
-          "cost": 9.7462,
+          "messages": 590,
+          "cost": 11.899,
           "tokens": {
-            "input": 888556,
-            "output": 153995,
+            "input": 1075560,
+            "output": 180726,
             "reasoning": 0,
-            "cacheRead": 43610880,
+            "cacheRead": 53443584,
             "cacheWrite": 0,
-            "total": 44653431,
-            "billable": 1042551
+            "total": 54699870,
+            "billable": 1256286
           }
         },
         {
@@ -104,18 +104,18 @@
     {
       "id": "week",
       "label": "Last 7 days",
-      "since": "2026-06-10T19:17:19Z",
+      "since": "2026-06-10T19:36:29Z",
       "totals": {
-        "messages": 3279,
-        "cost": 13.1767,
+        "messages": 3371,
+        "cost": 15.3295,
         "tokens": {
-          "input": 6437943,
-          "output": 807235,
+          "input": 6624947,
+          "output": 833966,
           "reasoning": 331439,
-          "cacheRead": 218414470,
+          "cacheRead": 228247174,
           "cacheWrite": 2345799,
-          "total": 228336886,
-          "billable": 9922416
+          "total": 238383325,
+          "billable": 10136151
         }
       },
       "models": [
@@ -139,16 +139,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 498,
-          "cost": 9.7462,
+          "messages": 590,
+          "cost": 11.899,
           "tokens": {
-            "input": 888556,
-            "output": 153995,
+            "input": 1075560,
+            "output": 180726,
             "reasoning": 0,
-            "cacheRead": 43610880,
+            "cacheRead": 53443584,
             "cacheWrite": 0,
-            "total": 44653431,
-            "billable": 1042551
+            "total": 54699870,
+            "billable": 1256286
           }
         },
         {
@@ -206,16 +206,16 @@
       "label": "Lifetime",
       "since": null,
       "totals": {
-        "messages": 3279,
-        "cost": 13.1767,
+        "messages": 3371,
+        "cost": 15.3295,
         "tokens": {
-          "input": 6437943,
-          "output": 807235,
+          "input": 6624947,
+          "output": 833966,
           "reasoning": 331439,
-          "cacheRead": 218414470,
+          "cacheRead": 228247174,
           "cacheWrite": 2345799,
-          "total": 228336886,
-          "billable": 9922416
+          "total": 238383325,
+          "billable": 10136151
         }
       },
       "models": [
@@ -239,16 +239,16 @@
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 498,
-          "cost": 9.7462,
+          "messages": 590,
+          "cost": 11.899,
           "tokens": {
-            "input": 888556,
-            "output": 153995,
+            "input": 1075560,
+            "output": 180726,
             "reasoning": 0,
-            "cacheRead": 43610880,
+            "cacheRead": 53443584,
             "cacheWrite": 0,
-            "total": 44653431,
-            "billable": 1042551
+            "total": 54699870,
+            "billable": 1256286
           }
         },
         {
