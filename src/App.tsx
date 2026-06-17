@@ -12,8 +12,9 @@ import {
   Badge,
   Stack,
   Accordion,
+  SegmentedControl,
 } from '@mantine/core'
-import { IconTool, IconRobot, IconCircleCheck, IconCircleX, IconMinus, IconBulb, IconBrush } from '@tabler/icons-react'
+import { IconTool, IconRobot, IconCircleCheck, IconCircleX, IconMinus, IconBulb, IconBrush, IconChartBar } from '@tabler/icons-react'
 
 interface Project {
   name: string
@@ -45,6 +46,44 @@ interface DailyTodo {
   sections: TodoSection[]
 }
 
+type TokenKey = 'input' | 'output' | 'reasoning' | 'cacheRead' | 'cacheWrite'
+
+interface TokenTotals {
+  input: number
+  output: number
+  reasoning: number
+  cacheRead: number
+  cacheWrite: number
+  total: number
+  billable: number
+}
+
+interface TokenUsageModel {
+  id: string
+  provider: string
+  model: string
+  messages: number
+  cost: number
+  tokens: TokenTotals
+}
+
+interface TokenUsageWindow {
+  id: string
+  label: string
+  since: string | null
+  totals: {
+    messages: number
+    cost: number
+    tokens: TokenTotals
+  }
+  models: TokenUsageModel[]
+}
+
+interface OpenCodeTokenUsage {
+  generatedAt: string
+  windows: TokenUsageWindow[]
+}
+
 const priorityColor: Record<string, string> = {
   high: 'red',
   medium: 'yellow',
@@ -61,6 +100,42 @@ const statusColor: Record<string, string> = {
   up: 'green',
   degraded: 'yellow',
   unreachable: 'red',
+}
+
+const tokenSegments: { key: TokenKey; label: string; color: string }[] = [
+  { key: 'cacheRead', label: 'Cache read', color: 'var(--mantine-color-cyan-6)' },
+  { key: 'input', label: 'Input', color: 'var(--mantine-color-blue-6)' },
+  { key: 'output', label: 'Output', color: 'var(--mantine-color-green-6)' },
+  { key: 'reasoning', label: 'Reasoning', color: 'var(--mantine-color-violet-6)' },
+  { key: 'cacheWrite', label: 'Cache write', color: 'var(--mantine-color-orange-6)' },
+]
+
+const compactNumber = new Intl.NumberFormat('en', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+})
+
+const currency = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 2,
+})
+
+function formatTokens(value: number) {
+  return compactNumber.format(value)
+}
+
+function formatCost(value: number) {
+  return value === 0 ? '$0' : currency.format(value)
+}
+
+function formatDateTime(value: string) {
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) return value
+  return date.toLocaleString(undefined, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  })
 }
 
 function statusIcon(status: string) {
@@ -80,17 +155,23 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [todo, setTodo] = useState<DailyTodo | null>(null)
+  const [tokenUsage, setTokenUsage] = useState<OpenCodeTokenUsage | null>(null)
+  const [usageWindow, setUsageWindow] = useState('day')
 
   useEffect(() => {
     Promise.all([
       fetch('/projects.json').then((r) => r.json()),
       fetch('/health.json').then((r) => r.json()),
       fetch('/daily-todo.json').then((r) => r.json()),
+      fetch('/opencode-token-usage.json')
+        .then((r) => (r.ok ? r.json() : null))
+        .catch(() => null),
     ])
-      .then(([proj, hlth, td]) => {
+      .then(([proj, hlth, td, usage]) => {
         setProjects(proj)
         setHealth(hlth)
         setTodo(td)
+        setTokenUsage(usage)
         setLoading(false)
       })
       .catch((err) => {
@@ -100,6 +181,12 @@ function App() {
   }, [])
 
   const healthMap = new Map(health.map((h) => [h.hostname, h]))
+  const usageWindows = tokenUsage?.windows ?? []
+  const selectedUsage = usageWindows.find((window) => window.id === usageWindow) ?? usageWindows[0]
+  const maxModelTokens = selectedUsage?.models.reduce(
+    (max, model) => Math.max(max, model.tokens.total),
+    0,
+  ) ?? 0
 
   return (
     <Container size="sm" py="xl">
@@ -206,6 +293,125 @@ function App() {
               )
             })}
           </Accordion>
+        </Card>
+      )}
+
+      {tokenUsage && selectedUsage && (
+        <Card withBorder radius="md" mb="md" padding="lg">
+          <Group mb="sm" justify="space-between" align="flex-start">
+            <Group gap="sm">
+              <ThemeIcon variant="gradient" size="lg" radius="md"
+                gradient={{ from: 'blue', to: 'grape' }}
+              >
+                <IconChartBar size={20} />
+              </ThemeIcon>
+              <div>
+                <Text fw={600}>OpenCode Token Usage</Text>
+                <Text size="sm" c="dimmed">
+                  Generated {formatDateTime(tokenUsage.generatedAt)}
+                </Text>
+              </div>
+            </Group>
+            <SegmentedControl
+              size="xs"
+              value={selectedUsage.id}
+              onChange={setUsageWindow}
+              data={usageWindows.map((window) => ({ label: window.label, value: window.id }))}
+            />
+          </Group>
+
+          <SimpleGrid cols={{ base: 1, sm: 3 }} mb="md">
+            <Card withBorder radius="sm" padding="sm">
+              <Text size="xs" c="dimmed" tt="uppercase" fw={700}>Total tokens</Text>
+              <Text fw={700} size="xl">{formatTokens(selectedUsage.totals.tokens.total)}</Text>
+            </Card>
+            <Card withBorder radius="sm" padding="sm">
+              <Text size="xs" c="dimmed" tt="uppercase" fw={700}>Messages</Text>
+              <Text fw={700} size="xl">{selectedUsage.totals.messages.toLocaleString()}</Text>
+            </Card>
+            <Card withBorder radius="sm" padding="sm">
+              <Text size="xs" c="dimmed" tt="uppercase" fw={700}>Estimated cost</Text>
+              <Text fw={700} size="xl">{formatCost(selectedUsage.totals.cost)}</Text>
+            </Card>
+          </SimpleGrid>
+
+          <Group gap="xs" mb="sm">
+            {tokenSegments.map((segment) => (
+              <Badge
+                key={segment.key}
+                size="sm"
+                variant="light"
+                leftSection={
+                  <span style={{
+                    display: 'block',
+                    width: 8,
+                    height: 8,
+                    borderRadius: 999,
+                    background: segment.color,
+                  }} />
+                }
+              >
+                {segment.label}
+              </Badge>
+            ))}
+          </Group>
+
+          <Stack gap="sm">
+            {selectedUsage.models.length === 0 && (
+              <Text size="sm" c="dimmed" fs="italic">No OpenCode usage recorded for this window.</Text>
+            )}
+            {selectedUsage.models.map((model) => {
+              const total = model.tokens.total
+              const barWidth = maxModelTokens > 0 ? Math.max((total / maxModelTokens) * 100, 1) : 0
+
+              return (
+                <div key={model.id}>
+                  <Group justify="space-between" gap="sm" align="flex-start" mb={4}>
+                    <div>
+                      <Group gap={6} mb={2}>
+                        <Badge size="xs" variant="light">{model.provider}</Badge>
+                        <Text size="sm" fw={600}>{model.model}</Text>
+                      </Group>
+                      <Text size="xs" c="dimmed">
+                        {model.messages.toLocaleString()} messages · {formatTokens(model.tokens.billable)} billable · {formatCost(model.cost)}
+                      </Text>
+                    </div>
+                    <Text size="sm" fw={700}>{formatTokens(total)}</Text>
+                  </Group>
+                  <div style={{
+                    height: 14,
+                    width: '100%',
+                    borderRadius: 999,
+                    background: 'var(--mantine-color-dark-6)',
+                    overflow: 'hidden',
+                  }}>
+                    <div style={{
+                      display: 'flex',
+                      height: '100%',
+                      width: `${barWidth}%`,
+                      minWidth: total > 0 ? 6 : 0,
+                    }}>
+                      {tokenSegments.map((segment) => {
+                        const value = model.tokens[segment.key]
+                        if (value <= 0 || total <= 0) return null
+                        return (
+                          <div
+                            key={segment.key}
+                            title={`${segment.label}: ${value.toLocaleString()} tokens`}
+                            style={{
+                              width: `${(value / total) * 100}%`,
+                              minWidth: 2,
+                              background: segment.color,
+                            }}
+                          />
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </Stack>
         </Card>
       )}
 

@@ -1,0 +1,99 @@
+{
+  "date": "2026-06-17",
+  "generated_at": "2026-06-17T04:25:00Z",
+  "sections": [
+    {
+      "id": "new-projects",
+      "title": "New Project Ideas",
+      "icon": "bulb",
+      "items": [
+        {
+          "text": "status.projects.blueskye.co.uk — Go + SQLite uptime monitor pings all subdomains every 60s, records latency and status codes, and exposes a /metrics endpoint for Prometheus/Grafana. Fills the monitoring gap with zero external dependencies.",
+          "priority": "high"
+        },
+        {
+          "text": "secrets.projects.blueskye.co.uk (env-vault) — Encrypted credential vault with a simple web UI. Stores DATABASE_URL, REDIS_URL, Auth0 secrets etc. in an AES-256-GCM encrypted SQLite file, decrypted via a boot-time passphrase, served via local HTTP API. Solves the .env-committed-to-repo problem across all projects.",
+          "priority": "high"
+        },
+        {
+          "text": "logs.projects.blueskye.co.uk — Real-time log viewer tailing pm2 logs, systemd journal, and Caddy access logs via SSE. Svelte frontend + Go WebSocket bridge for fast multi-stream filtering and browser-based search. Replaces manual pm2 logs/journalctl invocation.",
+          "priority": "medium"
+        },
+        {
+          "text": "caddy-config-guardian — A GitHub Actions workflow that runs caddy validate on every push to dotfiles and checks that every subdomain in projects.json has a matching Caddy block. Prevents webhook deploy failures from invalid Caddy config.",
+          "priority": "medium"
+        },
+        {
+          "text": "budget.projects.blueskye.co.uk — Personal finance tracker with Go + SQLite backend and React frontend. Envelope-budgeting with CSV import from UK banks. All data stays local behind Caddy TLS. Replaces need for third-party budgeting services.",
+          "priority": "low"
+        },
+        {
+          "text": "scheduler.projects.blueskye.co.uk — A cron-replacement web UI for managing systemd timers and cron jobs visually. Shows next-run times, last-run status, and output logs. Built with Fastify + React, reads from systemctl --user list-timers and crontab -l under the hood.",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "id": "improvements",
+      "title": "Project Improvements",
+      "icon": "wrench",
+      "items": [
+        {
+          "text": "Deduplicate Caddyfile — Three copies exist (~/Caddyfile, ~/dev/caddy/Caddyfile, ~/dotfiles/Caddyfile symlink). systemd caddy.service reads ~/Caddyfile, but dotfiles symlinks to ~/dev/caddy/Caddyfile. Symlink ~/Caddyfile -> ~/dotfiles/Caddyfile and remove ~/dev/caddy/ copy to prevent drift.",
+          "priority": "high"
+        },
+        {
+          "text": "Gitignore pm2 artifacts in xivarbitrage — pm2.err, pm2.log, pm2.pid in /home/skye/dev/projects/xivarbitrage.projects.blueskye.co.uk/ are not gitignored and could leak deployment paths.",
+          "priority": "high"
+        },
+        {
+          "text": "Add /api/health to xivmitplan — scan-projects health check only gets HTTP 200. Adding a GET /api/health that verifies Prisma DB connectivity would make monitoring meaningful for the Next.js app at port 3000.",
+          "priority": "medium"
+        },
+        {
+          "text": "Switch xivmitplan from npm to pnpm — The only project still on npm. No engine-strict, save-prefix~, or minimumReleaseAge=7d protections. Migrate to pnpm for supply-chain security alignment.",
+          "priority": "medium"
+        },
+        {
+          "text": "Add .env.example to xivmitplan — README references it but file doesn't exist at /home/skye/dev/projects/xivmitplan.projects.blueskye.co.uk/.env.example. Blocks new contributors from setting up Auth0/DB config.",
+          "priority": "medium"
+        },
+        {
+          "text": "Upgrade xivmitplan to TypeScript 6.0 — Currently on TS 5.x while the other two projects use TS 6.0, causing mental context-switch cost and older compiler features.",
+          "priority": "low"
+        }
+      ]
+    },
+    {
+      "id": "housekeeping",
+      "title": "Housekeeping",
+      "icon": "broom",
+      "items": [
+        {
+          "text": "Unify 3 Caddyfile copies into single source of truth in ~/dotfiles/Caddyfile, symlink ~/Caddyfile to it, remove ~/dev/caddy/ directory.",
+          "priority": "high"
+        },
+        {
+          "text": "Check Let's Encrypt TLS cert expiry for all 3 subdomains — run caddy cert-info or inspect certs manually. No alerting exists if auto-renewal fails.",
+          "priority": "high"
+        },
+        {
+          "text": "Prune xivarbitrage pm2 logs — process has restarted 45 times (~56min uptime per restart on average). Check journald disk usage with journalctl --disk-usage too.",
+          "priority": "medium"
+        },
+        {
+          "text": "Verify webhook-server systemd unit at localhost:9090 is active and can process a test payload. No alert if the deploy pipeline goes silent.",
+          "priority": "medium"
+        },
+        {
+          "text": "Check xivarbitrage BullMQ queue health — inspect stalled jobs, retry counts, and queue length via redis-cli to ensure the 30k-job/24h snapshot pipeline is healthy.",
+          "priority": "medium"
+        },
+        {
+          "text": "Run topgrade --yes to catch up on brew, npm, pnpm, pip, rustup, and gh CLI updates missed by the 06:00 daily cron.",
+          "priority": "low"
+        }
+      ]
+    }
+  ]
+}

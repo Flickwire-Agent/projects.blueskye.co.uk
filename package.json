@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && ~/bin/scan-projects",
+    "build": "tsc -b && vite build && ~/bin/scan-projects && ~/bin/daily-todo",
     "lint": "eslint .",
     "preview": "vite preview"
   },
