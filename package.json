@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && ~/bin/scan-projects && ~/bin/opencode-token-usage",
+    "build": "tsc -b && vite build && ~/bin/build-project-registry && ~/bin/opencode-token-usage",
     "lint": "eslint .",
     "preview": "vite preview"
   },

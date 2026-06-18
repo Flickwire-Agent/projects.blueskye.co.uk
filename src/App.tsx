@@ -12,6 +12,7 @@ import {
   Badge,
   Stack,
   SegmentedControl,
+  Image,
 } from '@mantine/core'
 import { IconTool, IconRobot, IconCircleCheck, IconCircleX, IconMinus, IconChartBar } from '@tabler/icons-react'
 
@@ -19,10 +20,9 @@ interface Project {
   name: string
   hostname: string
   url: string
-}
-
-interface Health {
-  hostname: string
+  description: string
+  techStack: string[]
+  screenshot: string | null
   status: string
   http_status: number
 }
@@ -120,7 +120,6 @@ function statusIcon(status: string) {
 
 function App() {
   const [projects, setProjects] = useState<Project[]>([])
-  const [health, setHealth] = useState<Health[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [tokenUsage, setTokenUsage] = useState<OpenCodeTokenUsage | null>(null)
@@ -129,14 +128,12 @@ function App() {
   useEffect(() => {
     Promise.all([
       fetch('/projects.json').then((r) => r.json()),
-      fetch('/health.json').then((r) => r.json()),
       fetch('/opencode-token-usage.json')
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
     ])
-      .then(([proj, hlth, usage]) => {
+      .then(([proj, usage]) => {
         setProjects(proj)
-        setHealth(hlth)
         setTokenUsage(usage)
         setLoading(false)
       })
@@ -146,7 +143,6 @@ function App() {
       })
   }, [])
 
-  const healthMap = new Map(health.map((h) => [h.hostname, h]))
   const usageWindows = tokenUsage?.windows ?? []
   const selectedUsage = usageWindows.find((window) => window.id === usageWindow) ?? usageWindows[0]
   const maxModelTokens = selectedUsage?.models.reduce(
@@ -155,7 +151,7 @@ function App() {
   ) ?? 0
 
   return (
-    <Container size="sm" py="xl">
+    <Container size="lg" py="xl">
       <Title order={1} mb="xs">projects.blueskye.co.uk</Title>
       <Text c="dimmed" mb="lg">
         Agentic infrastructure — managed entirely by an AI agent.
@@ -200,7 +196,7 @@ function App() {
             <b>dotfiles</b> repo mirrors every config change to GitHub
           </List.Item>
           <List.Item>
-            <b>scan-projects</b> timer auto-discovers new project directories
+            <b>project registry</b> manually curated in <code>public/projects.json</code>
           </List.Item>
         </List>
       </Card>
@@ -329,31 +325,61 @@ function App() {
       {loading && <Text c="dimmed" fs="italic">Loading projects…</Text>}
       {error && <Text c="red" fs="italic">Failed to load: {error}</Text>}
 
-      <SimpleGrid cols={{ base: 1, sm: 2 }}>
-        {projects.map((p) => {
-          const h = healthMap.get(p.hostname)
-          return (
-            <Anchor key={p.hostname} href={p.url} underline="never">
-              <Card withBorder radius="md" padding="lg"
-                style={{ transition: 'border-color 0.15s' }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-blue-6)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-dark-4)'}
-              >
-                <Group justify="space-between" mb={4}>
-                  <Text fw={600} size="lg" c="blue.4">{p.name}</Text>
-                  {h && (
-                    <Badge color={statusColor[h.status]} variant="light" size="sm"
-                      leftSection={statusIcon(h.status)}
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
+        {projects.map((p) => (
+          <Anchor key={p.hostname} href={p.url} underline="never">
+            <Card withBorder radius="md" padding={0}
+              style={{ height: '100%', overflow: 'hidden', transition: 'border-color 0.15s' }}
+              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-blue-6)'}
+              onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--mantine-color-dark-4)'}
+            >
+              {p.screenshot ? (
+                <Card.Section>
+                  <Image
+                    src={p.screenshot}
+                    alt={p.name}
+                    h={170}
+                    fit="cover"
+                  />
+                </Card.Section>
+              ) : (
+                <Card.Section>
+                  <div style={{
+                    height: 170,
+                    background: 'linear-gradient(135deg, var(--mantine-color-dark-6), var(--mantine-color-blue-9))',
+                  }} />
+                </Card.Section>
+              )}
+
+              <Stack gap="xs" p="lg">
+                <Group justify="space-between" align="flex-start" gap="xs">
+                  <div style={{ minWidth: 0 }}>
+                    <Text fw={600} size="lg" c="blue.4" lineClamp={1}>{p.name}</Text>
+                    <Text size="sm" c="dimmed" lineClamp={1}>{p.hostname}</Text>
+                  </div>
+                  {p.status && (
+                    <Badge color={statusColor[p.status] || 'gray'} variant="light" size="sm"
+                      leftSection={statusIcon(p.status)}
+                      style={{ flexShrink: 0 }}
                     >
-                      {h.status}
+                      {p.status}
                     </Badge>
                   )}
                 </Group>
-                <Text size="sm" c="dimmed">{p.hostname}</Text>
-              </Card>
-            </Anchor>
-          )
-        })}
+                <Text size="sm" lineClamp={4}>{p.description}</Text>
+                {p.techStack && p.techStack.length > 0 && (
+                  <Group gap={6} mt={4}>
+                    {p.techStack.map((tech) => (
+                      <Badge key={tech} size="sm" variant="light" color="gray">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </Group>
+                )}
+              </Stack>
+            </Card>
+          </Anchor>
+        ))}
       </SimpleGrid>
 
       <Stack align="center" gap="xs" mt="xl" mb="lg">

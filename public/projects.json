@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Xivarbitrage",
+    "hostname": "xivarbitrage.projects.blueskye.co.uk",
+    "url": "https://xivarbitrage.projects.blueskye.co.uk",
+    "description": "Final Fantasy XIV market-board explorer for spotting cross-world and cross-data-centre price gaps. Uses Universalis market data and XIVAPI item metadata to surface DC disparities, bargain listings, item listings, and recent sale history.",
+    "techStack": ["TypeScript", "React", "Vite", "Fastify", "PostgreSQL", "Redis", "BullMQ", "Universalis", "XIVAPI"]
+  },
+  {
+    "name": "Xivmitplan",
+    "hostname": "xivmitplan.projects.blueskye.co.uk",
+    "url": "https://xivmitplan.projects.blueskye.co.uk",
+    "description": "Raid mitigation planner for Final Fantasy XIV parties. Build an 8-player roster, load encounter timelines, assign job-specific mitigation and healing cooldowns to mechanics, then validate cooldown conflicts before sharing or forking plans.",
+    "techStack": ["TypeScript", "Next.js", "Mantine", "Auth0", "Prisma", "PostgreSQL", "PM2"]
+  }
+]
