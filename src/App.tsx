@@ -11,10 +11,9 @@ import {
   Group,
   Badge,
   Stack,
-  Accordion,
   SegmentedControl,
 } from '@mantine/core'
-import { IconTool, IconRobot, IconCircleCheck, IconCircleX, IconMinus, IconBulb, IconBrush, IconChartBar } from '@tabler/icons-react'
+import { IconTool, IconRobot, IconCircleCheck, IconCircleX, IconMinus, IconChartBar } from '@tabler/icons-react'
 
 interface Project {
   name: string
@@ -26,24 +25,6 @@ interface Health {
   hostname: string
   status: string
   http_status: number
-}
-
-interface TodoItem {
-  text: string
-  priority: string
-}
-
-interface TodoSection {
-  id: string
-  title: string
-  icon: string
-  items: TodoItem[]
-}
-
-interface DailyTodo {
-  date: string
-  generated_at: string
-  sections: TodoSection[]
 }
 
 type TokenKey = 'input' | 'output' | 'reasoning' | 'cacheRead' | 'cacheWrite'
@@ -82,18 +63,6 @@ interface TokenUsageWindow {
 interface OpenCodeTokenUsage {
   generatedAt: string
   windows: TokenUsageWindow[]
-}
-
-const priorityColor: Record<string, string> = {
-  high: 'red',
-  medium: 'yellow',
-  low: 'gray',
-}
-
-const sectionIcon: Record<string, typeof IconBulb> = {
-  bulb: IconBulb,
-  wrench: IconTool,
-  broom: IconBrush,
 }
 
 const statusColor: Record<string, string> = {
@@ -154,7 +123,6 @@ function App() {
   const [health, setHealth] = useState<Health[]>([])
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-  const [todo, setTodo] = useState<DailyTodo | null>(null)
   const [tokenUsage, setTokenUsage] = useState<OpenCodeTokenUsage | null>(null)
   const [usageWindow, setUsageWindow] = useState('day')
 
@@ -162,15 +130,13 @@ function App() {
     Promise.all([
       fetch('/projects.json').then((r) => r.json()),
       fetch('/health.json').then((r) => r.json()),
-      fetch('/daily-todo.json').then((r) => r.json()),
       fetch('/opencode-token-usage.json')
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
     ])
-      .then(([proj, hlth, td, usage]) => {
+      .then(([proj, hlth, usage]) => {
         setProjects(proj)
         setHealth(hlth)
-        setTodo(td)
         setTokenUsage(usage)
         setLoading(false)
       })
@@ -238,63 +204,6 @@ function App() {
           </List.Item>
         </List>
       </Card>
-
-      {todo && (
-        <Card withBorder radius="md" mb="md" padding="lg">
-          <Group mb="sm">
-            <ThemeIcon variant="gradient" size="lg" radius="md"
-              gradient={{ from: 'orange', to: 'red' }}
-            >
-              <IconBulb size={20} />
-            </ThemeIcon>
-            <div>
-              <Text fw={600}>Daily Briefing</Text>
-              <Text size="sm" c="dimmed">
-                Brainstormed {todo.date}
-              </Text>
-            </div>
-          </Group>
-          <Accordion variant="contained" radius="md" defaultValue="">
-            {todo.sections.map((section) => {
-              const Icon = sectionIcon[section.icon] || IconBulb
-              const itemCount = section.items.length
-              return (
-                <Accordion.Item key={section.id} value={section.id}>
-                  <Accordion.Control>
-                    <Group gap="sm">
-                      <ThemeIcon variant="light" size="sm" radius="xl">
-                        <Icon size={14} />
-                      </ThemeIcon>
-                      <Text size="sm" fw={500}>{section.title}</Text>
-                      {itemCount > 0 && (
-                        <Badge size="sm" variant="filled" color="gray">{itemCount}</Badge>
-                      )}
-                    </Group>
-                  </Accordion.Control>
-                  <Accordion.Panel>
-                    <Stack gap="xs">
-                      {itemCount === 0 && (
-                        <Text size="sm" c="dimmed" fs="italic">Nothing yet — awaiting agent input.</Text>
-                      )}
-                      {section.items.map((item, i) => (
-                        <Group key={i} gap="sm" wrap="nowrap" align="flex-start">
-                          <Badge
-                            size="sm"
-                            variant="dot"
-                            color={priorityColor[item.priority] || 'gray'}
-                            style={{ flexShrink: 0, marginTop: 3 }}
-                          />
-                          <Text size="sm">{item.text}</Text>
-                        </Group>
-                      ))}
-                    </Stack>
-                  </Accordion.Panel>
-                </Accordion.Item>
-              )
-            })}
-          </Accordion>
-        </Card>
-      )}
 
       {tokenUsage && selectedUsage && (
         <Card withBorder radius="md" mb="md" padding="lg">

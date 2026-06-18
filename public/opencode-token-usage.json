@@ -1,54 +1,38 @@
 {
-  "generatedAt": "2026-06-17T19:36:29Z",
+  "generatedAt": "2026-06-18T10:42:53Z",
   "windows": [
     {
       "id": "day",
       "label": "Last 24 hours",
-      "since": "2026-06-16T19:36:29Z",
+      "since": "2026-06-17T10:42:53Z",
       "totals": {
-        "messages": 3371,
-        "cost": 15.3295,
+        "messages": 2337,
+        "cost": 22.8643,
         "tokens": {
-          "input": 6624947,
-          "output": 833966,
-          "reasoning": 331439,
-          "cacheRead": 228247174,
-          "cacheWrite": 2345799,
-          "total": 238383325,
-          "billable": 10136151
+          "input": 4458063,
+          "output": 680001,
+          "reasoning": 186814,
+          "cacheRead": 160702011,
+          "cacheWrite": 3053743,
+          "total": 169080632,
+          "billable": 8378621
         }
       },
       "models": [
         {
-          "id": "opencode/big-pickle",
-          "provider": "opencode",
-          "model": "big-pickle",
-          "messages": 1989,
-          "cost": 0,
-          "tokens": {
-            "input": 4264981,
-            "output": 451050,
-            "reasoning": 284247,
-            "cacheRead": 121267328,
-            "cacheWrite": 0,
-            "total": 126267606,
-            "billable": 5000278
-          }
-        },
-        {
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 590,
-          "cost": 11.899,
+          "messages": 625,
+          "cost": 13.0216,
           "tokens": {
-            "input": 1075560,
-            "output": 180726,
+            "input": 1099663,
+            "output": 190358,
             "reasoning": 0,
-            "cacheRead": 53443584,
+            "cacheRead": 59028736,
             "cacheWrite": 0,
-            "total": 54699870,
-            "billable": 1256286
+            "total": 60318757,
+            "billable": 1290021
           }
         },
         {
@@ -71,16 +55,48 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 353,
+          "messages": 521,
           "cost": 0,
           "tokens": {
-            "input": 1276110,
-            "output": 80126,
-            "reasoning": 47192,
-            "cacheRead": 21656064,
+            "input": 2086922,
+            "output": 140183,
+            "reasoning": 95343,
+            "cacheRead": 31977984,
             "cacheWrite": 0,
-            "total": 23059492,
-            "billable": 1403428
+            "total": 34300432,
+            "billable": 2322448
+          }
+        },
+        {
+          "id": "opencode/big-pickle",
+          "provider": "opencode",
+          "model": "big-pickle",
+          "messages": 563,
+          "cost": 0,
+          "tokens": {
+            "input": 1262054,
+            "output": 152458,
+            "reasoning": 91471,
+            "cacheRead": 30545152,
+            "cacheWrite": 0,
+            "total": 32051135,
+            "billable": 1505983
+          }
+        },
+        {
+          "id": "opencode-go/qwen3.7-max",
+          "provider": "opencode-go",
+          "model": "qwen3.7-max",
+          "messages": 188,
+          "cost": 6.4122,
+          "tokens": {
+            "input": 1128,
+            "output": 74938,
+            "reasoning": 0,
+            "cacheRead": 7269941,
+            "cacheWrite": 707944,
+            "total": 8053951,
+            "billable": 784010
           }
         },
         {
@@ -98,24 +114,40 @@
             "total": 0,
             "billable": 0
           }
+        },
+        {
+          "id": "openai/gpt-5.5-pro",
+          "provider": "openai",
+          "model": "gpt-5.5-pro",
+          "messages": 1,
+          "cost": 0,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "reasoning": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0,
+            "billable": 0
+          }
         }
       ]
     },
     {
       "id": "week",
       "label": "Last 7 days",
-      "since": "2026-06-10T19:36:29Z",
+      "since": "2026-06-11T10:42:53Z",
       "totals": {
-        "messages": 3371,
-        "cost": 15.3295,
+        "messages": 4110,
+        "cost": 22.8643,
         "tokens": {
-          "input": 6624947,
-          "output": 833966,
-          "reasoning": 331439,
-          "cacheRead": 228247174,
-          "cacheWrite": 2345799,
-          "total": 238383325,
-          "billable": 10136151
+          "input": 8141063,
+          "output": 1077627,
+          "reasoning": 448354,
+          "cacheRead": 274341179,
+          "cacheWrite": 3053743,
+          "total": 287061966,
+          "billable": 12720787
         }
       },
       "models": [
@@ -123,32 +155,32 @@
           "id": "opencode/big-pickle",
           "provider": "opencode",
           "model": "big-pickle",
-          "messages": 1989,
+          "messages": 2336,
           "cost": 0,
           "tokens": {
-            "input": 4264981,
-            "output": 451050,
-            "reasoning": 284247,
-            "cacheRead": 121267328,
+            "input": 4945054,
+            "output": 550084,
+            "reasoning": 353011,
+            "cacheRead": 144184320,
             "cacheWrite": 0,
-            "total": 126267606,
-            "billable": 5000278
+            "total": 150032469,
+            "billable": 5848149
           }
         },
         {
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 590,
-          "cost": 11.899,
+          "messages": 625,
+          "cost": 13.0216,
           "tokens": {
-            "input": 1075560,
-            "output": 180726,
+            "input": 1099663,
+            "output": 190358,
             "reasoning": 0,
-            "cacheRead": 53443584,
+            "cacheRead": 59028736,
             "cacheWrite": 0,
-            "total": 54699870,
-            "billable": 1256286
+            "total": 60318757,
+            "billable": 1290021
           }
         },
         {
@@ -171,22 +203,54 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 353,
+          "messages": 521,
           "cost": 0,
           "tokens": {
-            "input": 1276110,
-            "output": 80126,
-            "reasoning": 47192,
-            "cacheRead": 21656064,
+            "input": 2086922,
+            "output": 140183,
+            "reasoning": 95343,
+            "cacheRead": 31977984,
             "cacheWrite": 0,
-            "total": 23059492,
-            "billable": 1403428
+            "total": 34300432,
+            "billable": 2322448
+          }
+        },
+        {
+          "id": "opencode-go/qwen3.7-max",
+          "provider": "opencode-go",
+          "model": "qwen3.7-max",
+          "messages": 188,
+          "cost": 6.4122,
+          "tokens": {
+            "input": 1128,
+            "output": 74938,
+            "reasoning": 0,
+            "cacheRead": 7269941,
+            "cacheWrite": 707944,
+            "total": 8053951,
+            "billable": 784010
           }
         },
         {
           "id": "openai/gpt-5.3-codex-spark",
           "provider": "openai",
           "model": "gpt-5.3-codex-spark",
+          "messages": 1,
+          "cost": 0,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "reasoning": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0,
+            "billable": 0
+          }
+        },
+        {
+          "id": "openai/gpt-5.5-pro",
+          "provider": "openai",
+          "model": "gpt-5.5-pro",
           "messages": 1,
           "cost": 0,
           "tokens": {
@@ -206,16 +270,16 @@
       "label": "Lifetime",
       "since": null,
       "totals": {
-        "messages": 3371,
-        "cost": 15.3295,
+        "messages": 4110,
+        "cost": 22.8643,
         "tokens": {
-          "input": 6624947,
-          "output": 833966,
-          "reasoning": 331439,
-          "cacheRead": 228247174,
-          "cacheWrite": 2345799,
-          "total": 238383325,
-          "billable": 10136151
+          "input": 8141063,
+          "output": 1077627,
+          "reasoning": 448354,
+          "cacheRead": 274341179,
+          "cacheWrite": 3053743,
+          "total": 287061966,
+          "billable": 12720787
         }
       },
       "models": [
@@ -223,32 +287,32 @@
           "id": "opencode/big-pickle",
           "provider": "opencode",
           "model": "big-pickle",
-          "messages": 1989,
+          "messages": 2336,
           "cost": 0,
           "tokens": {
-            "input": 4264981,
-            "output": 451050,
-            "reasoning": 284247,
-            "cacheRead": 121267328,
+            "input": 4945054,
+            "output": 550084,
+            "reasoning": 353011,
+            "cacheRead": 144184320,
             "cacheWrite": 0,
-            "total": 126267606,
-            "billable": 5000278
+            "total": 150032469,
+            "billable": 5848149
           }
         },
         {
           "id": "opencode-go/kimi-k2.7-code",
           "provider": "opencode-go",
           "model": "kimi-k2.7-code",
-          "messages": 590,
-          "cost": 11.899,
+          "messages": 625,
+          "cost": 13.0216,
           "tokens": {
-            "input": 1075560,
-            "output": 180726,
+            "input": 1099663,
+            "output": 190358,
             "reasoning": 0,
-            "cacheRead": 53443584,
+            "cacheRead": 59028736,
             "cacheWrite": 0,
-            "total": 54699870,
-            "billable": 1256286
+            "total": 60318757,
+            "billable": 1290021
           }
         },
         {
@@ -271,22 +335,54 @@
           "id": "openai/gpt-5.5",
           "provider": "openai",
           "model": "gpt-5.5",
-          "messages": 353,
+          "messages": 521,
           "cost": 0,
           "tokens": {
-            "input": 1276110,
-            "output": 80126,
-            "reasoning": 47192,
-            "cacheRead": 21656064,
+            "input": 2086922,
+            "output": 140183,
+            "reasoning": 95343,
+            "cacheRead": 31977984,
             "cacheWrite": 0,
-            "total": 23059492,
-            "billable": 1403428
+            "total": 34300432,
+            "billable": 2322448
+          }
+        },
+        {
+          "id": "opencode-go/qwen3.7-max",
+          "provider": "opencode-go",
+          "model": "qwen3.7-max",
+          "messages": 188,
+          "cost": 6.4122,
+          "tokens": {
+            "input": 1128,
+            "output": 74938,
+            "reasoning": 0,
+            "cacheRead": 7269941,
+            "cacheWrite": 707944,
+            "total": 8053951,
+            "billable": 784010
           }
         },
         {
           "id": "openai/gpt-5.3-codex-spark",
           "provider": "openai",
           "model": "gpt-5.3-codex-spark",
+          "messages": 1,
+          "cost": 0,
+          "tokens": {
+            "input": 0,
+            "output": 0,
+            "reasoning": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0,
+            "total": 0,
+            "billable": 0
+          }
+        },
+        {
+          "id": "openai/gpt-5.5-pro",
+          "provider": "openai",
+          "model": "gpt-5.5-pro",
           "messages": 1,
           "cost": 0,
           "tokens": {
