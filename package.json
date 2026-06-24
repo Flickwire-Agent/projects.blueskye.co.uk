@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build && ~/bin/build-project-registry && ~/bin/opencode-token-usage",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "token-usage": "~/bin/opencode-token-usage"
   },
   "dependencies": {
     "@mantine/core": "~9.3.1",
