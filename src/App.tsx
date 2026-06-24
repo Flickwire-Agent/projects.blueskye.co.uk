@@ -128,7 +128,7 @@ function App() {
   useEffect(() => {
     Promise.all([
       fetch('/projects.json').then((r) => r.json()),
-      fetch('/opencode-token-usage.json')
+      fetch('/opencode-token-usage.json', { cache: 'no-cache' })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
     ])
