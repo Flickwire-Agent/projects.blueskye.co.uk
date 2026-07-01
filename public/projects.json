@@ -17,7 +17,7 @@
     "name": "Xivflips",
     "hostname": "xivflips.projects.blueskye.co.uk",
     "url": "https://xivflips.projects.blueskye.co.uk",
-    "description": "Mobile-first Final Fantasy XIV market flip tracker for logging purchases, listings, sales, watchlist targets, profit, ROI, and daily market snapshots sourced from the xivarbitrage API. Includes an admin panel with user management and moderation impersonation.",
+    "description": "Mobile-first Final Fantasy XIV market flip tracker for logging purchases, listings, sales, watchlist targets, profit, ROI, and daily market snapshots sourced from the xivarbitrage API.",
     "techStack": ["TypeScript", "React", "Vite", "Hono", "Mantine", "XIVAuth", "Drizzle", "PostgreSQL", "PM2"]
   }
 ]
