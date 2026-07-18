@@ -19,5 +19,12 @@
     "url": "https://xivflips.projects.blueskye.co.uk",
     "description": "Mobile-first Final Fantasy XIV market flip tracker for logging purchases, listings, sales, watchlist targets, profit, ROI, and daily market snapshots sourced from the xivarbitrage API.",
     "techStack": ["TypeScript", "React", "Vite", "Hono", "Mantine", "XIVAuth", "Drizzle", "PostgreSQL", "systemd"]
+  },
+  {
+    "name": "The Morrow Archive",
+    "hostname": "morrow-archive.projects.blueskye.co.uk",
+    "url": "https://morrow-archive.projects.blueskye.co.uk",
+    "description": "A quiet digital cabinet of questions, field notes, and speculative instruments. Its first exhibit presents six almost-useful machines engineered for subtle human problems.",
+    "techStack": ["TypeScript", "Vite", "CSS", "Caddy"]
   }
 ]
