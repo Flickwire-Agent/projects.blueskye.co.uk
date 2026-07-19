@@ -26,5 +26,12 @@
     "url": "https://morrow-archive.projects.blueskye.co.uk",
     "description": "A quiet digital cabinet of questions, field notes, and speculative instruments. Its first exhibit presents six almost-useful machines engineered for subtle human problems.",
     "techStack": ["TypeScript", "Vite", "CSS", "Caddy"]
+  },
+  {
+    "name": "Tidefield",
+    "hostname": "tidefield.projects.blueskye.co.uk",
+    "url": "https://tidefield.projects.blueskye.co.uk",
+    "description": "An interactive WebGPU field study of currents, thresholds, and settling light. Pointer movement creates temporary pressure in a shader-generated tide.",
+    "techStack": ["WebGPU", "WGSL", "HTML", "CSS"]
   }
 ]
