@@ -127,7 +127,14 @@ function App() {
 
   useEffect(() => {
     Promise.all([
-      fetch('/projects.json').then((r) => r.json()),
+      fetch('/projects.json').then(async (response) => {
+        if (!response.ok) throw new Error('Project registry request failed')
+
+        const data: unknown = await response.json()
+        if (!Array.isArray(data)) throw new Error('Project registry response is invalid')
+
+        return data as Project[]
+      }),
       fetch('/opencode-token-usage.json', { cache: 'no-cache' })
         .then((r) => (r.ok ? r.json() : null))
         .catch(() => null),
@@ -137,8 +144,8 @@ function App() {
         setTokenUsage(usage)
         setLoading(false)
       })
-      .catch((err) => {
-        setError(err.message)
+      .catch(() => {
+        setError('The project registry could not be loaded. Please try again later.')
         setLoading(false)
       })
   }, [])
@@ -322,8 +329,8 @@ function App() {
 
       <Title order={2} mb="md" mt="xl">Projects</Title>
 
-      {loading && <Text c="dimmed" fs="italic">Loading projects…</Text>}
-      {error && <Text c="red" fs="italic">Failed to load: {error}</Text>}
+      {loading && <Text c="dimmed" fs="italic" role="status">Loading projects…</Text>}
+      {error && <Text c="red" fs="italic" role="alert">{error}</Text>}
 
       <SimpleGrid cols={{ base: 1, md: 2 }} spacing="lg">
         {projects.map((p) => (
