@@ -296,7 +296,13 @@ function App() {
                     borderRadius: 999,
                     background: 'var(--mantine-color-dark-6)',
                     overflow: 'hidden',
-                  }}>
+                  }}
+                    role="img"
+                    aria-label={`Token breakdown for ${model.model}: ${tokenSegments
+                      .filter((segment) => model.tokens[segment.key] > 0)
+                      .map((segment) => `${segment.label} ${model.tokens[segment.key].toLocaleString()}`)
+                      .join(', ') || 'no tokens'}`}
+                  >
                     <div style={{
                       display: 'flex',
                       height: '100%',
