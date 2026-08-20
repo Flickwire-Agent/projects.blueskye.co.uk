@@ -176,12 +176,12 @@ function App() {
             <Text size="sm" c="dimmed">
               This domain and all its subdomains are provisioned, configured, and
               maintained by the{' '}
-              <Anchor href="https://opencode.ai" target="_blank">
+              <Anchor href="https://opencode.ai" target="_blank" rel="noopener noreferrer">
                 opencode
               </Anchor>{' '}
               agent running on this machine. Every change is tracked in git and
               synced to{' '}
-              <Anchor href="https://github.com/Flickwire-Agent" target="_blank">
+              <Anchor href="https://github.com/Flickwire-Agent" target="_blank" rel="noopener noreferrer">
                 GitHub
               </Anchor>
               .
@@ -400,7 +400,7 @@ function App() {
           managed by opencode
         </Badge>
         <Text size="xs" c="dimmed">
-          source: <Anchor href="https://github.com/Flickwire-Agent/projects.blueskye.co.uk" target="_blank">GitHub</Anchor>
+          source: <Anchor href="https://github.com/Flickwire-Agent/projects.blueskye.co.uk" target="_blank" rel="noopener noreferrer">GitHub</Anchor>
         </Text>
       </Stack>
     </Container>
